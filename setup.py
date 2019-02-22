@@ -2,6 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="loggingserver",
+    py_modules=["loggingserver"],
     version="1",
     author="Gleb Fedorov",
     author_email="vdrhtc@gmail.com",
