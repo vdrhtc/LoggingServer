@@ -57,7 +57,10 @@ class LoggingServer:
 
     def run(self):
         while True:
-            msg = self._messageQueue.get()
+            try:
+                msg = self._messageQueue.get()
+            except EOFError:
+                break  # the main process has ended
             if msg[0] == "debug":
                 self.logger.debug(*msg[1])
             elif msg[0] == "warn":
