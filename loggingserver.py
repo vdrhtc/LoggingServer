@@ -10,17 +10,19 @@ from logging.handlers import TimedRotatingFileHandler
 class LoggingServer:
 
     INSTANCE = None
-    logger = logging.getLogger('overseer')
 
     @staticmethod
-    def getInstance(test = False):
+    def getInstance(name, test = False):
         if LoggingServer.INSTANCE is None:
+
+            LoggingServer.logger = logging.getLogger(name)
+
             try:
                 os.mkdir("log")
             except FileExistsError:
                 pass
             finally:
-                file_name = 'log/overseer.log' if not test else 'log/overseer_test.log'
+                file_name = 'log/%s.log'%name if not test else 'log/%s_test.log'%name
                 logging_handler = TimedRotatingFileHandler(
                     file_name, when="midnight", backupCount=1)
 
